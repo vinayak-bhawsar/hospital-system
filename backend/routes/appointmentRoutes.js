@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Appointment = require('../models/Appointment');
 
-// 1. BOOK AN APPOINTMENT
+
 router.post('/book', async (req, res) => {
     try {
         const { patientId, doctorId, date } = req.body;
@@ -24,10 +24,9 @@ router.post('/book', async (req, res) => {
     }
 });
 
-// 2. GET APPOINTMENTS (For a specific user)
 router.get('/:userId', async (req, res) => {
     try {
-        // This finds appointments where the user is either the patient or the doctor
+        
         const appointments = await Appointment.find({
             $or: [{ patient: req.params.userId }, { doctor: req.params.userId }]
         })
@@ -40,7 +39,7 @@ router.get('/:userId', async (req, res) => {
     }
 });
 
-// 3. CANCEL APPOINTMENT
+
 router.delete('/cancel/:id', async (req, res) => {
     try {
         await Appointment.findByIdAndDelete(req.params.id);

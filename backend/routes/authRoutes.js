@@ -46,21 +46,21 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         
-        // Find user by email
+
         const user = await User.findOne({ email });
         if (!user) {
             console.log(` Login failed: User not found (${email})`);
             return res.status(400).json({ message: "Invalid Credentials" });
         }
 
-        // Compare encrypted password
+        
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             console.log(` Login failed: Wrong password for (${email})`);
             return res.status(400).json({ message: "Invalid Credentials" });
         }
 
-        // Create JWT Token (Using the hardcoded secret to avoid 'undefined' error)
+        
         const token = jwt.sign(
             { id: user._id, role: user.role }, 
             JWT_SECRET, 
@@ -84,7 +84,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// 3. GET ALL DOCTORS (For the patient booking list)
+
 router.get('/doctors', async (req, res) => {
     try {
         const doctors = await User.find({ role: 'doctor' }).select('-password');
