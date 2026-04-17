@@ -1,0 +1,6 @@
+// backend/config.js
+module.exports = {
+    MONGO_URI: "mongodb+srv://bhawsarvinayak55_db_user:fKPV6xSmbgbafJD3@cluster0.innesfk.mongodb.net/hospital_db?retryWrites=true&w=majority",
+    JWT_SECRET: "my_super_secret_key_123",
+    PORT: 5000
+};
